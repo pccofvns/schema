@@ -1,0 +1,32 @@
+buildscript {
+    dependencies {
+        classpath 'com.oracle.jdbc:ojdbc10:19.3.0.0'
+    }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
+plugins {
+    id 'java'
+    id 'org.flywaydb.flyway' version '5.1.4'
+}
+sourceCompatibility = 11
+targetCompatibility = 11
+group = "org.ghumakkad.db"
+
+// Versioning of dependencies
+wrapper.gradleVersion = '5.5.1'
+flyway {
+    url = project.ext['dburl']
+    user = project.ext['userid']
+    password = project.ext['password']
+    table = 'schema_history'
+    placeholders = [
+        'keyABC': 'valueXYZ',
+    ]
+}
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
